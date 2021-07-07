@@ -9,6 +9,7 @@ import { FormControl } from '@material-ui/core';
 import { InputLabel } from '@material-ui/core';
 import { Input } from '@material-ui/core';
 import propTypes from 'prop-types';
+import { FormHelperText } from '@material-ui/core';
 
 
 const customStyles = {
@@ -37,7 +38,9 @@ class Header extends Component{
         super();
         this.state={
             modalIsOpen:false,
-            value:0
+            value:0,
+            usernameRequired: "dispNone",
+            username: ""
         };
     }
     openModalHandler = () => {
@@ -48,6 +51,13 @@ class Header extends Component{
     }
     tabChangeHandler=(event,value)=>{
         this.setState({value});
+    }
+    loginClickHandler = () => {
+        this.state.username === "" ? this.setState({ usernameRequired: "dispBlock" }) : this.setState({ usernameRequired: "dispNone" });
+    }
+
+    inputUsernameChangeHandler = (e) => {
+        this.setState({ username: e.target.value });
     }
     render(){
       
@@ -60,21 +70,24 @@ class Header extends Component{
             </header>
             <Modal ariaHideApp={false} isOpen={this.state.modalIsOpen} contentLabel="Login" onRequestClose={this.closeModalHandler}  style={customStyles}>
                 <Tabs value={this.state.value} onChange={this.tabChangeHandler} className="tabs">
-                    <Tab label="Login"/>
-                    <Tab label="Register"/>
+                    <Tab style={{fontWeight:700}} label="Login"/>
+                    <Tab style={{fontWeight:700}} label="Register"/>
                 </Tabs>
 
                 {this.state.value === 0 &&
                 <TabContainer>
                 <FormControl required >
                             <InputLabel htmlFor="username">Username</InputLabel>
-                            <Input id="username" type="text" />
-                        </FormControl><br/>
+                            <Input id="username" type="text" username={this.state.username} onChange={this.inputUsernameChangeHandler}/>
+                            <FormHelperText className={this.state.usernameRequired}>
+                                    <span className="red">required</span>
+                                </FormHelperText>
+                        </FormControl><br/><br/>
                         <FormControl required>
                             <InputLabel htmlFor="password">Password</InputLabel>
                             <Input id="password" type="password" />
                         </FormControl><br/><br/>
-                        <Button variant="contained" color="primary">Login</Button>
+                        <Button style={{fontWeight:700}} variant="contained" color="primary" onClick={this.loginClickHandler}>Login</Button>
                 </TabContainer>
                }
  
