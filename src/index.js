@@ -6,8 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import Home from './screens/home/Home';
 
 ReactDOM.render(
-  
-    <Home />,
+  <Home/>,
   document.getElementById('root')
 );
 

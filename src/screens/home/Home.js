@@ -1,6 +1,6 @@
+import ReactDOM from "react-dom";
 import React, { Component } from "react";
-import {render} from 'react-dom';
-import Details from '../details/Details';
+import Details from '../../screens/details/Details';
 import "./Home.css";
 import Header from "../../common/header/Header";
 import { withStyles } from "@material-ui/core/styles";
@@ -52,7 +52,7 @@ class Home extends Component {
     this.state = {
       movieName: "",
       genres: [],
-      artists: [],
+      artists: []
     };
   }
 
@@ -68,7 +68,7 @@ class Home extends Component {
   };
 
   movieClickHandler = (movieId) => {
-    render(<Details movieId={movieId} />, document.getElementById('root'));
+    ReactDOM.render(<Details movieId={movieId} />, document.getElementById('root'));
 }
 
   render() {
