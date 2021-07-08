@@ -1,6 +1,23 @@
 .upcomingMovies-heading{
     text-align: center;
     background-color: rgb(236, 131, 166);
-    padding: 15px;
+    padding: 10px;
     font-size: 1em;
 }
+::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: grey;
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: grey;
+  } 
