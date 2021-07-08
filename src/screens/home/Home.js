@@ -6,6 +6,12 @@ import moviesData from '../../common/movieData';
 import { GridList } from '@material-ui/core';
 import { GridListTile } from '@material-ui/core';
 import { GridListTileBar } from '@material-ui/core';
+import { Card } from '@material-ui/core';
+import { CardContent } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import { FormControl } from '@material-ui/core';
+import { InputLabel } from '@material-ui/core';
+import { Input } from '@material-ui/core';
 
 const styles = theme => ({
     root: {
@@ -20,9 +26,27 @@ const styles = theme => ({
     gridListMain: {
         transform: 'translateZ(0)',
         cursor: 'pointer'
+    },
+    formControl: {
+        margin: theme.spacing.unit,
+        minWidth: 240,
+        maxWidth: 240
+    },
+     title: {
+        color: theme.palette.primary.light,
     }
 });
 class Home extends Component{
+    constructor() {
+        super();
+        this.state = {
+            movieName: ""
+        }
+    }
+
+    movieNameChangeHandler = event => {
+        this.setState({ movieName: event.target.value });
+    }
     
     render(){
         const { classes } = this.props;
@@ -52,7 +76,21 @@ class Home extends Component{
                             ))}
                         </GridList>
                     </div>
-                    <div className="right"></div>
+                    <div className="right">
+                        <Card>
+                            <CardContent>
+                                <FormControl className={classes.formControl}>
+                                <Typography className={classes.title} color="textSecondary"> FIND MOVIES BY:</Typography>
+
+                                </FormControl>
+                                <FormControl className={classes.formControl}>
+                                    <InputLabel htmlFor="movieName">Movie Name</InputLabel>
+                                    <Input id="movieName" onChange={this.movieNameChangeHandler} />
+                                </FormControl>
+
+                            </CardContent>
+                        </Card>
+                    </div>
                 </div>
             </div>
         )
