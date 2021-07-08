@@ -5,9 +5,9 @@ import { withStyles } from "@material-ui/core/styles";
 import moviesData from "../../common/movieData";
 import genres from "../../common/genres";
 import artists from "../../common/artists";
-import { GridList } from "@material-ui/core";
-import { GridListTile } from "@material-ui/core";
-import { GridListTileBar } from "@material-ui/core";
+import { ImageList } from "@material-ui/core";
+import { ImageListItemBar } from "@material-ui/core";
+import { ImageListItem } from "@material-ui/core";
 import { Card } from "@material-ui/core";
 import { CardContent } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
@@ -19,24 +19,25 @@ import { Select } from "@material-ui/core";
 import { Checkbox } from "@material-ui/core";
 import { ListItemText } from "@material-ui/core";
 import { TextField } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
 const styles = (theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },
-  gridListUpcomingMovies: {
+  ImageListUpcomingMovies: {
     flexWrap: "nowrap",
     transform: "translateZ(0)",
     width: "100%",
   },
-  gridListMain: {
+  ImageListMain: {
     transform: "translateZ(0)",
     cursor: "pointer",
   },
   formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 240,
+    margin: theme.spacing(),
+    minWidth: 400,
     maxWidth: 240,
   },
   title: {
@@ -72,27 +73,27 @@ class Home extends Component {
           <Header />
         </div>
         <div className="upcomingMovies-heading">Upcoming Movies</div>
-        <GridList cols={5} className={classes.gridListUpcomingMovies}>
+        <ImageList cols={5} className={classes.ImageListUpcomingMovies}>
           {moviesData.map((movie) => (
-            <GridListTile key={movie.id}>
+            <ImageListItem key={movie.id}>
               <img
                 src={movie.poster_url}
                 alt={movie.title}
                 className="movie-poster"
               />
-              <GridListTileBar title={movie.title} />
-            </GridListTile>
+              <ImageListItemBar title={movie.title} />
+            </ImageListItem>
           ))}
-        </GridList>
+        </ImageList>
         <div className="flex-container">
           <div className="left">
-            <GridList
+            <ImageList
               cellHeight={350}
               cols={4}
-              className={classes.gridListMain}
+              className={classes.ImageListMain}
             >
               {moviesData.map((movie) => (
-                <GridListTile
+                <ImageListItem
                   className="released-movie-grid-item"
                   key={"grid" + movie.id}
                 >
@@ -101,7 +102,7 @@ class Home extends Component {
                     className="movie-poster"
                     alt={movie.title}
                   />
-                  <GridListTileBar
+                  <ImageListItemBar
                     title={movie.title}
                     subtitle={
                       <span>
@@ -110,9 +111,9 @@ class Home extends Component {
                       </span>
                     }
                   />
-                </GridListTile>
+                </ImageListItem>
               ))}
-            </GridList>
+            </ImageList>
           </div>
           <div className="right">
             <Card>
@@ -187,23 +188,30 @@ class Home extends Component {
                   </Select>
                 </FormControl>
                 <FormControl className={classes.formControl}>
-                                    <TextField
-                                        id="releaseDateStart"
-                                        label="Release Date Start"
-                                        type="date"
-                                        defaultValue=""
-                                        InputLabelProps={{ shrink: true }}
-                                    />
-                                </FormControl>
-                                <FormControl className={classes.formControl}>
-                                    <TextField
-                                        id="releaseDateEno"
-                                        label="Release Date End"
-                                        type="date"
-                                        defaultValue=""
-                                        InputLabelProps={{ shrink: true }}
-                                    />
-                                </FormControl>
+                  <TextField
+                    id="releaseDateStart"
+                    label="Release Date Start"
+                    type="date"
+                    defaultValue=""
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </FormControl>
+                <FormControl className={classes.formControl}>
+                  <TextField
+                    id="releaseDateEno"
+                    label="Release Date End"
+                    type="date"
+                    defaultValue=""
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </FormControl>
+                <br />
+                <br />
+                <FormControl className={classes.formControl}>
+                  <Button variant="contained" color="primary">
+                    APPLY
+                  </Button>
+                </FormControl>
               </CardContent>
             </Card>
           </div>
