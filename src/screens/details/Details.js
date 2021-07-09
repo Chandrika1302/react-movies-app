@@ -1,14 +1,16 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import Header from "../../common/header/Header";
 import moviesData from "../../common/movieData";
 import "./Details.css";
 import { Typography } from "@material-ui/core";
+import Home from "../home/Home";
 
 class Details extends Component {
   constructor() {
     super();
     this.state = {
-      movie: {}
+      movie: {},
     };
   }
   componentWillMount() {
@@ -19,12 +21,20 @@ class Details extends Component {
     this.setState({ currentState });
     console.log(this.state);
   }
+  backtohomeHandler = () => {
+    ReactDOM.render(<Home />, document.getElementById("root"));
+  };
 
   render() {
     let movie = this.state.movie;
     return (
       <div className="details">
         <Header />
+        <div className="back">
+          <Typography onClick={this.backtohomeHandler}>
+            &#60; Back to Home
+          </Typography>
+        </div>
         <div className="flex-containerDetails">
           <div className="leftDetails">
             <img src={movie.poster_url} alt={movie.title} />
@@ -37,7 +47,29 @@ class Details extends Component {
             </div>
             <div>
               <Typography>
-                <span className="bold">Genres: </span> {movie.genres.join(', ')}
+                <span className="bold">Genres: </span> {movie.genres.join(", ")}
+              </Typography>
+            </div>
+            <div>
+              <Typography>
+                <span className="bold">Duration:</span> {movie.duration}{" "}
+              </Typography>
+            </div>
+            <div>
+              <Typography>
+                <span className="bold">Release Date:</span>{" "}
+                {new Date(movie.release_date).toDateString()}{" "}
+              </Typography>
+            </div>
+            <div>
+              <Typography>
+                <span className="bold"> Rating:</span> {movie.critics_rating}{" "}
+              </Typography>
+            </div>
+            <div className="marginTop16">
+              <Typography>
+                <span className="bold">Plot:</span>{" "}
+                <a href={movie.wiki_url}>(Wiki Link)</a> {movie.storyline}{" "}
               </Typography>
             </div>
           </div>
