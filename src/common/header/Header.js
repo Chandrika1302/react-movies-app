@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import "./Header.css";
 import Button from "@material-ui/core/Button";
 import Modal from "react-modal";
@@ -10,7 +11,7 @@ import { InputLabel } from "@material-ui/core";
 import { Input } from "@material-ui/core";
 import propTypes from "prop-types";
 import { FormHelperText } from "@material-ui/core";
-
+import BookShow from '../../screens/bookshow/BookShow';
 const customStyles = {
   content: {
     top: "50%",
@@ -31,6 +32,7 @@ const TabContainer = function (props) {
 TabContainer.propTypes = {
   children: propTypes.node.isRequired,
 };
+
 class Header extends Component {
   constructor() {
     super();
@@ -131,7 +133,9 @@ class Header extends Component {
   inputContactChangeHandler = (e) => {
     this.setState({ contact: e.target.value });
   };
-
+  bookShowHandler = (e) => {
+    ReactDOM.render(<BookShow />, document.getElementById("root"));
+  };
   render() {
     return (
       <div>
@@ -144,7 +148,19 @@ class Header extends Component {
             >
               Login
             </Button>
+            {this.props.showBookShowButton === "true" ?
+          <div className="bookshow-button">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.bookShowHandler}
+            >
+              Book Show
+            </Button>
           </div>
+          : ""}
+          </div>
+          
         </header>
         <Modal
           ariaHideApp={false}
