@@ -1,15 +1,14 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import Header from "../../common/header/Header";
 import moviesData from "../../common/movieData";
 import "./Details.css";
 import { Typography } from "@material-ui/core";
-import Home from "../home/Home";
 import YouTube from "react-youtube";
 import { ImageList } from "@material-ui/core";
 import { ImageListItemBar } from "@material-ui/core";
 import { ImageListItem } from "@material-ui/core";
-import StarBorderIcon from '@material-ui/icons/StarBorder'
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import { Link } from 'react-router-dom';
 class Details extends Component {
   constructor() {
     super();
@@ -47,14 +46,14 @@ class Details extends Component {
   componentWillMount() {
     let currentState = this.state;
     currentState.movie = moviesData.filter((mov) => {
-      return mov.id === this.props.movieId;
+      return mov.id === this.props.match.params.id;
     })[0];
-    this.setState({ currentState });
-    console.log(this.state);
-  }
-  backtohomeHandler = () => {
-    ReactDOM.render(<Home />, document.getElementById("root"));
+  
+    this.setState(currentState);
   };
+  artistClickHandler = (url) => {
+    window.location = url;
+}
   starClickHandler = (id) => {
     let starIconList = [];
     for (let star of this.state.starIcons) {
@@ -79,11 +78,12 @@ class Details extends Component {
     };
     return (
       <div className="details">
-        <Header showBookShowButton="true"/>
+        <Header id={this.props.match.params.id} showBookShowButton="true"/>
         <div className="back">
-          <Typography onClick={this.backtohomeHandler}>
-            &#60; Back to Home
-          </Typography>
+         
+          <Typography>
+                        <Link to="/">  &#60; Back to Home</Link>
+                    </Typography>
         </div>
         <div className="flex-containerDetails">
           <div className="leftDetails">
